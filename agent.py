@@ -12,7 +12,8 @@ load_dotenv()
 
 EMAIL = os.getenv("EMAIL")
 SECRET = os.getenv("SECRET")
-RECURSION_LIMIT =  5000
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+RECURSION_LIMIT =  9000
 # -------------------------------------------------
 # STATE
 # -------------------------------------------------
@@ -32,10 +33,9 @@ rate_limiter = InMemoryRateLimiter(
     max_bucket_size=9  
 )
 llm = init_chat_model(
-   model_provider="google_genai",
-   model="gemini-2.5-flash",
-   rate_limiter=rate_limiter
-).bind_tools(TOOLS)   
+    model_provider="openrouter",
+    model="openrouter/<your-model>",
+).bind_tools(TOOLS)
 
 
 # -------------------------------------------------
